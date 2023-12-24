@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Questions Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #question {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body background="codchalleng.jpg.jpg">
+
+<div id="quiz-container">
+    <div id="question"></div>
+    <input type="text" id="answer" placeholder="Your answer">
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <div id="result" style="display: none;"></div>
+</div>
+
+<script>
+    let currentQuestion = 1;
+    let correctAnswers = 0;
+
+    const questions = [
+        "Explain the difference between HTML and XHTML.",
+        "What is the purpose of the 'alt' attribute in an HTML image tag?",
+        "How do you create a hyperlink that opens in a new tab or window?",
+        "Describe the difference between the <div> and <span> elements in HTML.",
+        "What is the purpose of the HTML 'meta' tag, and how is it used?",
+        "How can you embed a video in an HTML document without using external plugins?",
+        "Explain the role of the 'DOCTYPE' declaration in an HTML document.",
+        "What is the significance of the 'role' attribute in HTML5?",
+        "How does the 'srcset' attribute in the <img> tag contribute to responsive web design?",
+        "Differentiate between the 'GET' and 'POST' methods in an HTML form.",
+        "What is the box model in CSS, and how does it influence the layout of elements?",
+        "Explain the difference between 'margin' and 'padding' in CSS.",
+        "How can you center an element horizontally and vertically in CSS without using Flexbox or Grid?",
+        "Describe the difference between absolute and relative positioning in CSS.",
+        "What is the purpose of the 'z-index' property, and how does it affect the stacking order of elements?",
+        "How do CSS selectors work, and what is the difference between the descendant and child selectors?",
+        "Explain the concept of CSS specificity and how it impacts style resolution.",
+        "What is the difference between 'undefined' and 'null' in JavaScript?",
+        "How does event delegation work in JavaScript, and why is it useful?",
+        "Explain the concept of closures in JavaScript and provide an example of how they can be used."
+    ];
+
+    function generateQuestion() {
+        const questionDiv = document.getElementById('question');
+        questionDiv.innerHTML = `<p>${questions[currentQuestion - 1]}</p>`;
+        document.getElementById('answer').value = ''; // Clear the input field
+    }
+
+    function checkAnswer() {
+        const userAnswer = document.getElementById('answer').value.toLowerCase();
+        const correctAnswer = "web development questions"; // Placeholder, as the answers are subjective in this case
+
+        if (userAnswer.includes(correctAnswer)) {
+            correctAnswers++;
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion <= questions.length) {
+            generateQuestion();
+        } else {
+            displayResults();
+        }
+    }
+
+    function displayResults() {
+        const quizContainer = document.getElementById('quiz-container');
+        quizContainer.innerHTML = `<div id="result">
+                                      <p>You answered ${correctAnswers} out of ${questions.length} questions correctly!</p>
+                                  </div>`;
+    }
+
+    generateQuestion();
+</script>
+
+</body>
+</html>
